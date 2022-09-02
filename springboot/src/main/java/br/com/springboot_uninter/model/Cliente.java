@@ -10,7 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -21,16 +26,21 @@ public class Cliente {
 	private Long id;
 	
 	@Column(nullable = false, length = 50)
+	@NotBlank(message = "Informe o nome!")
+	@Size(min = 3, max = 50)
 	private String nome;
 	
 	@Column(length = 14)
+	@CPF(message = "CPF inválido")
 	private String cpf;
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	@Column(nullable=false, name="data_nascimento", columnDefinition = "DATE")
+	@NotNull(message = "Informe a data de nascimento!")
 	private LocalDate dataDeNascimento;
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Informe o sexo!")
 	private Sexo sexo;
 	
 	@Column(length = 14)
@@ -40,6 +50,7 @@ public class Cliente {
 	private String celular;
 	
 	@Column(length = 50)
+	@Email
 	private String email;
 	
 	private boolean ativo;

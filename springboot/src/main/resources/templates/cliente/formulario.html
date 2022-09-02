@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-Br" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Sistema de Estoque</title>
@@ -18,23 +18,23 @@
 					<input class="form-check-input" role="switch" id="ativo" type="checkbox" th:field="*{ativo}"/>
 				</div>
 				<div class="mb-6">
-					<label class="form-label" for="nome">Nome</label>
+					<label class="form-label" for="nome">Nome*</label>
 					<input class="form-control" id="nome" type="text" th:field="*{nome}"/>
 					<span style="color: red" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 				</div>
 				<div class="row">
 					<div class="col-4 mb-3">
-						<label class="form-label" for="cpf">CPF</label>
+						<label class="form-label" for="cpf">CPF*</label>
 						<input class="form-control" id="cpf" type="text" th:field="*{cpf}" />
 						<span style="color: red" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
 					</div>
 					<div class="col-4 mb-3">
-						<label class="form-label" for="dataDeNascimento">Data de Nascimento</label>
+						<label class="form-label" for="dataDeNascimento">Data de Nascimento*</label>
 						<input class="form-control" id="dataDeNascimento" type="date" th:field="*{dataDeNascimento}" />
 						<span style="color: red" th:if="${#fields.hasErrors('dataDeNascimento')}" th:errors="*{dataDeNascimento}"></span>
 					</div>
 					<div class="col-4 mb-3">
-						<label class="form-label" for="sexo">Sexo</label>
+						<label class="form-label" for="sexo">Sexo*</label>
 						<select class="form-select" id="sexo" th:field="*{sexo}">
 							<option value="">Selecione uma opção</option>
 							<option value="MASCULINO">Masculino</option>
@@ -57,6 +57,9 @@
 						<input class="form-control" id="email" type="text" th:field="*{email}"/>
 						<span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 					</div>
+				</div>
+				<div class="mb-5">
+					<b>(*) Informações obrigatórias</b>
 				</div>
 				<div class="mb-3">
 					<input class="btn btn-primary" type="submit" value="Salvar"/>
