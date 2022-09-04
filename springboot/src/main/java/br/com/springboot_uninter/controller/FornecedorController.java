@@ -13,72 +13,76 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.springboot_uninter.bo.ClienteBO;
-import br.com.springboot_uninter.model.Cliente;
+import br.com.springboot_uninter.bo.FornecedorBO;
+import br.com.springboot_uninter.model.Fornecedor;
 
 @Controller
-@RequestMapping("/clientes")
-public class ClienteController {
+@RequestMapping("/fornecedores")
+public class FornecedorController {
 	
 	@Autowired
-	private ClienteBO bo;
+	private FornecedorBO bo;
 	
 	@RequestMapping(value="/novo", method=RequestMethod.GET)
 	public ModelAndView novo(ModelMap model) {
-		model.addAttribute("cliente", new Cliente());
-		return new ModelAndView("/cliente/formulario");
+		model.addAttribute("fornecedor", new Fornecedor());
+		return new ModelAndView("/fornecedor/formulario");
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public String salva(@Valid @ModelAttribute Cliente cliente, BindingResult result, RedirectAttributes attr) {
+	public String salva(@Valid @ModelAttribute Fornecedor fornecedor, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "cliente/formulario";
+			return "fornecedor/formulario";
 		}
-		if (cliente.getId() == null) {
-			bo.insere(cliente);
-			attr.addFlashAttribute("feedback", "Cliente cadastrado com sucesso!");
+		if (fornecedor.getId() == null) {
+			bo.insere(fornecedor);
+			attr.addFlashAttribute("feedback", "Fornecedor cadastrado com sucesso!");
 		} else {
-			bo.atualiza(cliente);
-			attr.addFlashAttribute("feedback", "Cliente atualizado com sucesso!");
+			bo.atualiza(fornecedor);
+			attr.addFlashAttribute("feedback", "Fornecedor atualizado com sucesso!");
 		}
-		return "redirect:/clientes"; 
+		return "redirect:/fornecedores"; 
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public ModelAndView lista(ModelMap model) {
-		model.addAttribute("clientes", bo.listaTodos());
-		return new ModelAndView("/cliente/lista", model);
+		model.addAttribute("fornecedores", bo.listaTodos());
+		return new ModelAndView("/fornecedor/lista", model);
 	}
 	
 	@RequestMapping(value="/edita/{id}", method=RequestMethod.GET)
 	public ModelAndView edita(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("cliente", bo.pesquisaPeloId(id));
-		return new ModelAndView("/cliente/formulario", model);
+		try {
+			model.addAttribute("fornecedor", bo.pesquisaPeloId(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("/fornecedor/formulario", model);
 	}
 	
 	@RequestMapping(value="/inativa/{id}", method=RequestMethod.GET)
 	public String inativa(@PathVariable("id") Long id, RedirectAttributes attr) {
 		try {
-			Cliente cliente = bo.pesquisaPeloId(id);
-			bo.inativa(cliente);
-			attr.addFlashAttribute("feedback", "Cliente foi inativado com sucesso!");
+			Fornecedor fornecedor = bo.pesquisaPeloId(id);
+			bo.inativa(fornecedor);
+			attr.addFlashAttribute("feedback", "Fornecedor foi inativado com sucesso!");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/clientes";
+		return "redirect:/fornecedores";
 	}
 	
 	@RequestMapping(value="/ativa/{id}", method=RequestMethod.GET)
 	public String ativa(@PathVariable("id") Long id, RedirectAttributes attr) {
 		try {
-			Cliente cliente = bo.pesquisaPeloId(id);
-			bo.ativa(cliente);
-			attr.addFlashAttribute("feedback", "Cliente foi ativado com sucesso!");
+			Fornecedor fornecedor = bo.pesquisaPeloId(id);
+			bo.ativa(fornecedor);
+			attr.addFlashAttribute("feedback", "Fornecedor foi ativado com sucesso!");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/clientes";
+		return "redirect:/fornecedores";
 	}
 
 }

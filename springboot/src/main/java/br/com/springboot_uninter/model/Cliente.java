@@ -30,7 +30,7 @@ public class Cliente {
 	@Size(min = 3, max = 50)
 	private String nome;
 	
-	@Column(length = 14)
+	@Column(length = 15)
 	@CPF(message = "CPF inválido")
 	private String cpf;
 	

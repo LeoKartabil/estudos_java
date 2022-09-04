@@ -29,11 +29,11 @@ final public class ClienteBOTest {
 	public void insere() {
 		Cliente cliente = new Cliente();
 		cliente.setNome("Leonardo Kartabil");
-		cliente.setCpf("05684956478");
+		cliente.setCpf("018.414.640-23");
 		cliente.setDataDeNascimento(LocalDate.of(1977, 07, 07));
 		cliente.setSexo(Sexo.MASCULINO);
-		cliente.setCelular("981434343");
-		cliente.setTelefone("33137777");
+		cliente.setCelular("(54)98143-4343");
+		cliente.setTelefone("(54)3313-7777");
 		cliente.setAtivo(true);
 		assertNotNull(cliente);
 		bo.insere(cliente);
@@ -87,12 +87,12 @@ final public class ClienteBOTest {
 		bo.ativa(cliente);
 	}
 	
-	@Test
-	@Order(8)
-	public void remove() {
-		Cliente cliente = bo.pesquisaPeloId(1L);
-		bo.remove(cliente);
-	}
+//	@Test
+//	@Order(8)
+//	public void remove() {
+//		Cliente cliente = bo.pesquisaPeloId(1L);
+//		bo.remove(cliente);
+//	}
 	
 	
 }
