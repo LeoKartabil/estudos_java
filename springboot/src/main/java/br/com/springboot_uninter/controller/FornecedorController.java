@@ -26,7 +26,7 @@ public class FornecedorController {
 	@RequestMapping(value="/novo", method=RequestMethod.GET)
 	public ModelAndView novo(ModelMap model) {
 		model.addAttribute("fornecedor", new Fornecedor());
-		return new ModelAndView("/fornecedor/formulario");
+		return new ModelAndView("/fornecedor/formulario", model);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
-@Table(name="fornecedor")
+@Table(name="fornecedores")
 public class Fornecedor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
