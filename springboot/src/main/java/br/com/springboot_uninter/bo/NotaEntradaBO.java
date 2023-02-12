@@ -22,7 +22,7 @@ public class NotaEntradaBO implements CRUD<NotaEntrada, Long>{
 
 	@Override
 	public List<NotaEntrada> listaTodos() {
-		return listaTodos();
+		return dao.listaTodos();
 	}
 
 	@Override
